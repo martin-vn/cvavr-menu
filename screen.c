@@ -5,6 +5,8 @@
 static TScreen FLASH * screen_current = 0;
 static uint8_t screen_cursor_row = 0;
 static uint8_t screen_offset = 0;
+static uint8_t screen_cursor_col = 0;
+
 STACK(screen_stack, 3);
 
 #define CURRENT_ITEM_INDEX (screen_cursor_row + screen_offset)
@@ -47,6 +49,8 @@ void screen_display() {
         }
         PRINTABLE_PRINT(*current_item);
     }
+    display_flush();
+    display_cursor_to(screen_cursor_col, screen_cursor_row);
 }
 
 void screen_cursor_up() {
@@ -76,4 +80,16 @@ void screen_select() {
 }
 
 void screen_alt_action() {
+}
+
+void screen_cursor_show() {
+    display_cursor_show();
+}
+
+void screen_cursor_hide() {
+    display_cursor_hide();
+}
+
+void screen_cursor_to_col(uint8_t column) {
+    screen_cursor_col = column;
 }

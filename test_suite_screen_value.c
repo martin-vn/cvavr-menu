@@ -72,6 +72,9 @@ void test_value_increase() {
     screen_push(&value_screen);
 
     console_select();
+    ASSERT_DISPLAY_CURSOR(MOCK_CURSOR_ON);
+    ASSERT_DISPLAY_CURSOR_AT(12, 0);
+
     console_up();
     ASSERT_DISPLAY(
         "VALUE:    1.1   ",
@@ -85,6 +88,8 @@ void test_value_increase() {
     );
 
     console_select();
+    ASSERT_DISPLAY_CURSOR_AT(10, 0);
+
     console_up();
     ASSERT_DISPLAY(
         "VALUE:    2.2   ",
@@ -92,6 +97,8 @@ void test_value_increase() {
     );
 
     console_select();
+    ASSERT_DISPLAY_CURSOR_AT(9, 0);
+
     console_up();
     ASSERT_DISPLAY(
         "VALUE:   12.2   ",
@@ -135,6 +142,8 @@ void test_value_complete() {
     );
 
     console_select();
+    ASSERT_DISPLAY_CURSOR(MOCK_CURSOR_OFF);
+
     console_up();
 
     ASSERT_DISPLAY(

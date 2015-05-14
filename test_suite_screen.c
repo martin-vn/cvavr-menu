@@ -65,6 +65,8 @@ void test_display_screen() {
         ">>ITEM1><<<<<<<<",
         "                "
     );
+
+    ASSERT_DISPLAY_FLUSHED();
 }
 
 void test_screen_scroll() {

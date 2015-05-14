@@ -17,8 +17,13 @@ static CONSOLE(
     screen_value_back
 );
 
-static TScreenValueSettings FLASH * current_value_setting = 0;
+static TScreenValueVar FLASH * current_value = 0;
+
 static uint16_t value_step = 0;
+static uint8_t value_cursor_col = 0;
+
+#define LAST_DIGIT_POS(current_value) current_value->pos + current_value->digits - 1
+#define DOT_POS(current_value) current_value->pos + current_value->digits - current_value->decimals
 
 void screen_value_print(TPrintable FLASH * screen_item) {
     TScreenValue FLASH * screen_value = (TScreenValue FLASH *) screen_item;
@@ -27,7 +32,7 @@ void screen_value_print(TPrintable FLASH * screen_item) {
 }
 
 void screen_print_var(TPrintable FLASH * screen_item) {
-    TScreenVar FLASH * var_item = (TScreenVar FLASH *) screen_item;
+    TScreenValueVar FLASH * var_item = (TScreenValueVar FLASH *) screen_item;
     char value_str[6] = {0};
 
     val_to_str(
@@ -41,26 +46,32 @@ void screen_print_var(TPrintable FLASH * screen_item) {
 
 void screen_value_select(TScreenItem FLASH * screen_item) {
     TScreenValue FLASH * value_item = (TScreenValue FLASH *) screen_item;
-    current_value_setting = &((TScreenVar FLASH *) value_item->elements[1])->settings;
+
+    current_value = (TScreenValueVar FLASH *) value_item->elements[1];
     value_step = 1;
+    value_cursor_col = LAST_DIGIT_POS(current_value);
+    if (current_value->decimals) ++value_cursor_col;
+
     console_push(&screen_value_console);
-    /* TODO show cursor */
+    screen_cursor_to_col(value_cursor_col);
+    screen_cursor_show();
+    screen_display();
 }
 
 void screen_value_up() {
     uint16_t value;
     uint16_t max;
 
-    if (!current_value_setting) return;
+    if (!current_value) return;
 
-    value = current_value_setting->current();
-    max = current_value_setting->max();
+    value = current_value->settings.current();
+    max = current_value->settings.max();
     if (value > max - value_step) {
         value = max;
     } else {
         value += value_step;
     }
-    current_value_setting->change(value);
+    current_value->settings.change(value);
     screen_display();
 }
 
@@ -68,32 +79,37 @@ void screen_value_down() {
     uint16_t value;
     uint16_t min;
 
-    if (!current_value_setting) return;
+    if (!current_value) return;
 
-    value = current_value_setting->current();;
-    min = current_value_setting->min();
+    value = current_value->settings.current();
+    min = current_value->settings.min();
 
     if (value < min + value_step) {
         value = min;
     } else {
         value -= value_step;
     }
-    current_value_setting->change(value);
+    current_value->settings.change(value);
     screen_display();
 }
 
 void screen_value_shift() {
-    if (!current_value_setting) return;
+    if (!current_value) return;
+
     value_step *= 10;
-    if (value_step > current_value_setting->max()) {
+    if (value_step > current_value->settings.max()) {
         screen_value_back();
     } else {
-    /* TODO move cursor */
+        --value_cursor_col;
+        if (value_cursor_col == DOT_POS(current_value)) {
+            --value_cursor_col;
+        }
+        screen_cursor_to_col(value_cursor_col);
+        screen_display();
     }
 }
 
 void screen_value_back() {
-    if (!current_value_setting) return;
-    /* TODO hide cursor */
+    screen_cursor_hide();
     console_pop();
 }

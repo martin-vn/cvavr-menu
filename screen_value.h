@@ -9,7 +9,7 @@
 
 #define SCREEN_VALUE(value_name, caption, var) \
     FLASH TScreenText value_name##_caption = caption; \
-    TOREMOVE FLASH TScreenVar value_name##_var = var; \
+    TOREMOVE FLASH TScreenValueVar value_name##_var = var; \
     TOREMOVE FLASH TScreenValue value_name = { \
         SCREEN_ITEM_INIT(screen_value_print, screen_value_select), \
         { \
@@ -49,7 +49,7 @@ typedef FLASH struct {
     const uint8_t digits;
     const uint8_t decimals;
     const uint8_t pos;
-} TScreenVar;
+} TScreenValueVar;
 
 void screen_value_print(TPrintable FLASH * screen_item);
 void screen_print_var(TPrintable FLASH * screen_item);

@@ -40,5 +40,8 @@ void screen_cursor_up();
 void screen_cursor_down();
 void screen_select();
 void screen_alt_action();
+void screen_cursor_show();
+void screen_cursor_hide();
+void screen_cursor_to_col(uint8_t x);
 
 #endif
