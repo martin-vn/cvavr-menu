@@ -69,6 +69,10 @@ void screen_cursor_down() {
 }
 
 void screen_select() {
+    TScreenItem FLASH * current_item = screen_current->items[CURRENT_ITEM_INDEX];
+
+    if (screen_current == 0) return;
+    SCREEN_ITEM_SELECT(current_item);
 }
 
 void screen_alt_action() {
