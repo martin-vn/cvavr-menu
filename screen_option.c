@@ -20,9 +20,9 @@ void screen_option_item_print(TPrintable FLASH * printable) {
     uint16_t current_value = var_item->settings.current();
     TScreenOptionItem FLASH * selected_item = var_item->option_items;
 
-    for(; selected_item->key != 0; ++selected_item) {
-        if (selected_item->value == current_value) break;
+    for(; selected_item->value != 0; ++selected_item) {
+        if (selected_item->key == current_value) break;
     }
 
-    display_print_const_str(selected_item->key, var_item->pos);
+    display_print_const_str(selected_item->value, var_item->pos);
 }

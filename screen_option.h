@@ -37,8 +37,8 @@
     } \
 
 typedef FLASH struct {
-    char FLASH * FLASH key;
-    int16_t FLASH value;
+    int16_t FLASH key;
+    char FLASH * FLASH value;
 } TScreenOptionItem;
 
 typedef uint16_t (*TOptionGetter)();
