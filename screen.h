@@ -8,13 +8,16 @@
 #define SCREEN_ITEM_INIT(print_action, select_action) {{print_action}, select_action}
 #define SCREEN_ITEM_SELECT(obj) ((TScreenItem FLASH *) obj)->select((TScreenItem FLASH *) obj)
 
-#define SCREEN_ITEM(item_name) (TScreenItem FLASH * FLASH) &item_name,
+#define SCREEN_ITEM(item_name) (TScreenItem FLASH *) &item_name,
 
 #define SCREEN(name, cursor, console, items) \
     TScreen FLASH name = { \
         cursor, \
         &console, \
-        {items 0} \
+        { \
+            items \
+            0 \
+        } \
     }
 
 FLASH struct _TScreenItem;

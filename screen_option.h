@@ -4,22 +4,20 @@
 #include "screen.h"
 #include "screen_text.h"
 
-#define TOREMOVE static
-
 #define SCREEN_OPTION(name, caption, settings, option_items, pos) \
     TScreenText FLASH name##_caption = caption; \
-    TOREMOVE TScreenOptionItem FLASH name##_option_items[] = option_items; \
-    TOREMOVE TScreenOptionVar FLASH name##_option = { \
+    TScreenOptionItem FLASH name##_option_items[] = option_items; \
+    TScreenOptionVar FLASH name##_option = { \
         PRINTABLE_INIT(screen_option_item_print), \
         pos, \
         settings, \
         name##_option_items \
     }; \
-    TOREMOVE TScreenOption FLASH name = { \
+    TScreenOption FLASH name = { \
         SCREEN_ITEM_INIT(screen_option_print, screen_option_select), \
         { \
-            (TPrintable FLASH * FLASH) &name##_caption, \
-            (TPrintable FLASH * FLASH) &name##_option \
+            (TPrintable FLASH *) &name##_caption, \
+            (TPrintable FLASH *) &name##_option \
         } \
     }
 

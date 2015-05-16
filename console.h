@@ -4,7 +4,12 @@
 #include "types.h"
 
 #define CONSOLE(name, up_action, down_action, select_action, alt_action) \
-    TConsole FLASH name = {up_action, down_action, select_action, alt_action}
+    TConsole FLASH name = { \
+        up_action, \
+        down_action, \
+        select_action, \
+        alt_action \
+    }
 
 typedef void (*TConsoleAction)();
 

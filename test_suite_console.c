@@ -12,7 +12,7 @@ static char * last_action = 0;
     TEST_CONSOLE_ACTION(name, down) \
     TEST_CONSOLE_ACTION(name, select) \
     TEST_CONSOLE_ACTION(name, alt) \
-    static CONSOLE( \
+    CONSOLE( \
         name, \
         con_##name##_up, \
         con_##name##_down, \

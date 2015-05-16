@@ -2,24 +2,9 @@
 
 #include "screen.h"
 #include "screen_value.h"
+#include "value_factory.h"
 
-static uint16_t test_value_value = 10;
-
-uint16_t test_value_get() {
-    return test_value_value;
-}
-
-void test_value_set(uint16_t value) {
-    test_value_value = value;
-}
-
-uint16_t test_value_min() {
-    return 10;
-}
-
-uint16_t test_value_max() {
-    return 900;
-}
+VALUE_DEFINE(test_value_value, 10, 900);
 
 static SCREEN_VALUE(
     test_value,
@@ -27,12 +12,7 @@ static SCREEN_VALUE(
     SCREEN_VAR(
         4,
         1,
-        SCREEN_VAR_SETTINGS(
-            test_value_get,
-            test_value_set,
-            test_value_min,
-            test_value_max
-        ),
+        VALUE_SETTINGS(test_value_value),
         8
     )
 );
@@ -53,6 +33,8 @@ static SCREEN(
 );
 
 void test_value_print() {
+    test_value_value = 10;
+
     init_test_display();
     screen_init();
     screen_push(&value_screen);

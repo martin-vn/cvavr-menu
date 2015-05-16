@@ -12,10 +12,10 @@ typedef FLASH struct {
 
 #define SCREEN_ACTION(name, command, text) \
     TScreenText FLASH name##_text = text; \
-    static TScreenAction FLASH name = { \
+    TScreenAction FLASH name = { \
         SCREEN_ITEM_INIT(screen_action_print, command), \
         { \
-            (TPrintable FLASH * FLASH) &name##_text \
+            (TPrintable FLASH *) &name##_text \
         } \
     }
 

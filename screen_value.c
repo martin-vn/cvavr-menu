@@ -9,7 +9,7 @@ void screen_value_down();
 void screen_value_shift();
 void screen_value_back();
 
-static CONSOLE(
+CONSOLE(
     screen_value_console,
     screen_value_up,
     screen_value_down,

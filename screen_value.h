@@ -4,17 +4,14 @@
 #include "screen.h"
 #include "screen_text.h"
 
-/* TODO Remove after tests */
-#define TOREMOVE static
-
 #define SCREEN_VALUE(value_name, caption, var) \
-    FLASH TScreenText value_name##_caption = caption; \
-    TOREMOVE FLASH TScreenValueVar value_name##_var = var; \
-    TOREMOVE FLASH TScreenValue value_name = { \
+    TScreenText FLASH value_name##_caption = caption; \
+    TScreenValueVar FLASH value_name##_var = var; \
+    TScreenValue FLASH value_name = { \
         SCREEN_ITEM_INIT(screen_value_print, screen_value_select), \
         { \
-            (TPrintable FLASH * FLASH) &value_name##_caption, \
-            (TPrintable FLASH * FLASH) &value_name##_var \
+            (TPrintable FLASH *) &value_name##_caption, \
+            (TPrintable FLASH *) &value_name##_var \
         } \
     }
 

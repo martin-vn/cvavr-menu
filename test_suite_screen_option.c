@@ -2,6 +2,7 @@
 #include "console.h"
 #include "screen.h"
 #include "screen_option.h"
+#include "value_factory.h"
 
 static CONSOLE(
     screen_actions,
@@ -11,30 +12,21 @@ static CONSOLE(
     screen_alt_action
 );
 
-static uint16_t test_value_value = 0;
+OPTION_DEFINE(test_option_value, 3);
 
-uint16_t test_option_current() {
-    return test_value_value;
-}
-
-void test_option_next() {
-    ++test_value_value;
-    if (test_value_value > 2) test_value_value = 0;
-}
-
-static SCREEN_OPTION(
+SCREEN_OPTION(
     test_option,
     SCREEN_TEXT("Option:", 0),
-    SCREEN_OPTION_SETTINGS(test_option_current, test_option_next),
+    OPTION_SETTINGS(test_option_value),
     SCREEN_OPTION_ITEM_LIST(
-        SCREEN_OPTION_ITEM("NULL", 0)
-        SCREEN_OPTION_ITEM("YES", 1)
-        SCREEN_OPTION_ITEM("NO", 2)
+        SCREEN_OPTION_ITEM(0, "NULL")
+        SCREEN_OPTION_ITEM(1, "YES")
+        SCREEN_OPTION_ITEM(2, "NO")
     ),
     8
 );
 
-static SCREEN(
+SCREEN(
     option_screen,
     "",
     screen_actions,
@@ -42,7 +34,7 @@ static SCREEN(
 );
 
 void test_option_display() {
-    test_value_value = 0;
+    test_option_value = 0;
 
     init_test_display();
     console_init();
@@ -56,7 +48,7 @@ void test_option_display() {
 }
 
 void test_option_next_value() {
-    test_value_value = 0;
+    test_option_value = 0;
 
     init_test_display();
     console_init();
