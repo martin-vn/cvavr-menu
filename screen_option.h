@@ -37,8 +37,8 @@
     } \
 
 typedef FLASH struct {
-    const char * FLASH key;
-    const int16_t value;
+    char FLASH * FLASH key;
+    int16_t FLASH value;
 } TScreenOptionItem;
 
 typedef uint16_t (*TOptionGetter)();
@@ -50,8 +50,8 @@ typedef FLASH struct {
 } TScreenValueSettings;
 
 typedef FLASH struct {
-    TPrintable _base;
-    const uint16_t pos;
+    TPrintable FLASH _base;
+    uint16_t FLASH pos;
     TScreenValueSettings FLASH settings;
     TScreenOptionItem FLASH * FLASH option_items;
 } TScreenOptionVar;

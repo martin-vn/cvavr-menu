@@ -39,7 +39,7 @@ void screen_print_var(TPrintable FLASH * screen_item) {
         var_item->settings.current(),
         var_item->digits,
         var_item->decimals,
-        (char *) &value_str
+        value_str
     );
     display_print_str(value_str, var_item->pos);
 }

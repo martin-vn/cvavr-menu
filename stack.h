@@ -11,7 +11,7 @@
         name##_items \
     };
 
-typedef FLASH struct {
+typedef struct {
     uint8_t size;
     uint8_t top;
     void FLASH ** items;

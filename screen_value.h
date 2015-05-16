@@ -44,11 +44,11 @@ typedef FLASH struct {
 } TScreenValueSettings;
 
 typedef FLASH struct {
-    FLASH TPrintable _base;
-    TScreenValueSettings settings;
-    const uint8_t digits;
-    const uint8_t decimals;
-    const uint8_t pos;
+    TPrintable FLASH _base;
+    TScreenValueSettings FLASH settings;
+    uint16_t FLASH digits;
+    uint16_t FLASH decimals;
+    uint16_t FLASH pos;
 } TScreenValueVar;
 
 void screen_value_print(TPrintable FLASH * screen_item);

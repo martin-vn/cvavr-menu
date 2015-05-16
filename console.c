@@ -11,7 +11,7 @@ void console_init() {
 
 void console_push(TConsole FLASH * console) {
     if (console_current != 0) {
-        if (stack_push(&console_stack, (void *) console_current) == -1) return;
+        if (stack_push(&console_stack, (void FLASH *) console_current) == -1) return;
     }
     console_current = console;
 }

@@ -27,7 +27,7 @@ typedef FLASH struct _TScreenItem {
 } TScreenItem;
 
 typedef FLASH struct {
-    const char * cursor;
+    char FLASH * FLASH cursor;
     TConsole FLASH * FLASH console;
     TScreenItem FLASH * FLASH items[];
 } TScreen;

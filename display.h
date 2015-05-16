@@ -24,8 +24,8 @@ typedef FLASH struct {
 void display_init(TDisplayConfig FLASH * display_config, char * display_rows);
 void display_clear();
 void display_goto_row(uint8_t row_index);
-void display_print_str(char * str, uint8_t pos);
-void display_print_const_str(const char * str, uint8_t pos);
+void display_print_str(char * str, uint16_t pos);
+void display_print_const_str(char FLASH * str, uint16_t pos);
 
 void display_flush();
 void display_cursor_show();

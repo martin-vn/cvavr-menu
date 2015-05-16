@@ -12,8 +12,8 @@
 
 typedef FLASH struct {
     FLASH TPrintable _base;
-    const char * FLASH text;
-    const uint8_t pos;
+    char FLASH * FLASH text;
+    uint16_t FLASH pos;
 } TScreenText;
 
 void screen_print_text(TPrintable FLASH * screen_item);

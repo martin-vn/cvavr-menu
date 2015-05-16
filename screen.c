@@ -9,7 +9,7 @@ static uint8_t screen_cursor_col = 0;
 
 STACK(screen_stack, 3);
 
-#define CURRENT_ITEM_INDEX (screen_cursor_row + screen_offset)
+#define CURRENT_ITEM_INDEX ((uint16_t) screen_cursor_row + (uint16_t) screen_offset)
 
 void screen_init() {
     screen_current = 0;
@@ -20,7 +20,7 @@ void screen_init() {
 
 void screen_push(TScreen FLASH * screen) {
     if (screen_current != 0) {
-        if (stack_push(&screen_stack, (void *) screen_current) == -1) return;
+        if (stack_push(&screen_stack, (void FLASH *) screen_current) == -1) return;
     }
     screen_current = screen;
     console_push(screen->console);
@@ -35,7 +35,7 @@ void screen_pop() {
 }
 
 void screen_display() {
-    TScreenItem FLASH ** current_item = &screen_current->items[screen_offset];
+    TScreenItem FLASH * FLASH * current_item = &screen_current->items[screen_offset];
     uint8_t row_index;
 
     if (screen_current == 0) return;
@@ -47,7 +47,7 @@ void screen_display() {
         if (screen_cursor_row == row_index) {
             display_print_const_str(screen_current->cursor, 0);
         }
-        PRINTABLE_PRINT(*current_item);
+        PRINTABLE_PRINT(((TScreenItem FLASH *) *current_item));
     }
     display_flush();
     display_cursor_to(screen_cursor_col, screen_cursor_row);
