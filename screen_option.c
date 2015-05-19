@@ -2,21 +2,15 @@
 
 #include "display.h"
 
-void screen_option_print(TPrintable FLASH * printable) {
-    TScreenOption FLASH * screen_option = (TScreenOption FLASH *) printable;
-    PRINTABLE_PRINT(screen_option->elements[0]);
-    PRINTABLE_PRINT(screen_option->elements[1]);
-}
-
 void screen_option_select(TScreenItem FLASH * screen_item) {
-    TScreenOptionVar FLASH * var_item = (TScreenOptionVar FLASH *)
-            ((TScreenOption FLASH *) screen_item)->elements[1];
+    TScreenOption FLASH * var_item = (TScreenOption FLASH *)
+            ((TScreenComposite FLASH *) screen_item)->elements[1];
     var_item->settings.next();
     screen_display();
 }
 
 void screen_option_item_print(TPrintable FLASH * printable) {
-    TScreenOptionVar FLASH * var_item = (TScreenOptionVar FLASH *) printable;
+    TScreenOption FLASH * var_item = (TScreenOption FLASH *) printable;
     uint16_t current_value = var_item->settings.current();
     TScreenOptionItem FLASH * selected_item = var_item->option_items;
 

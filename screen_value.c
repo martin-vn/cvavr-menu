@@ -17,7 +17,7 @@ CONSOLE(
     screen_value_back
 );
 
-static TScreenValueVar FLASH * current_value = 0;
+static TScreenValue FLASH * current_value = 0;
 
 static uint16_t value_step = 0;
 static uint8_t value_cursor_col = 0;
@@ -25,14 +25,8 @@ static uint8_t value_cursor_col = 0;
 #define LAST_DIGIT_POS(current_value) current_value->pos + current_value->digits - 1
 #define DOT_POS(current_value) current_value->pos + current_value->digits - current_value->decimals
 
-void screen_value_print(TPrintable FLASH * screen_item) {
-    TScreenValue FLASH * screen_value = (TScreenValue FLASH *) screen_item;
-    PRINTABLE_PRINT(screen_value->elements[0]);
-    PRINTABLE_PRINT(screen_value->elements[1]);
-}
-
 void screen_print_var(TPrintable FLASH * screen_item) {
-    TScreenValueVar FLASH * var_item = (TScreenValueVar FLASH *) screen_item;
+    TScreenValue FLASH * var_item = (TScreenValue FLASH *) screen_item;
     char value_str[6] = {0};
 
     val_to_str(
@@ -45,9 +39,9 @@ void screen_print_var(TPrintable FLASH * screen_item) {
 }
 
 void screen_value_select(TScreenItem FLASH * screen_item) {
-    TScreenValue FLASH * value_item = (TScreenValue FLASH *) screen_item;
+    TScreenComposite FLASH * value_item = (TScreenComposite FLASH *) screen_item;
 
-    current_value = (TScreenValueVar FLASH *) value_item->elements[1];
+    current_value = (TScreenValue FLASH *) value_item->elements[1];
     value_step = 1;
     value_cursor_col = LAST_DIGIT_POS(current_value);
     if (current_value->decimals) ++value_cursor_col;

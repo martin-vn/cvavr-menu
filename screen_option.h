@@ -2,24 +2,24 @@
 #define SCREEN_OPTION_H
 
 #include "screen.h"
+#include "screen_composite.h"
 #include "screen_text.h"
 
 #define SCREEN_OPTION(name, caption, settings, option_items, pos) \
-    TScreenText FLASH name##_caption = caption; \
-    TScreenOptionItem FLASH name##_option_items[] = option_items; \
-    TScreenOptionVar FLASH name##_option = { \
+    TScreenText FLASH _##name##_caption = caption; \
+    TScreenOptionItem FLASH _##name##_option_items[] = option_items; \
+    TScreenOption FLASH _##name##_option = { \
         PRINTABLE_INIT(screen_option_item_print), \
         pos, \
         settings, \
-        name##_option_items \
+        _##name##_option_items \
     }; \
-    TScreenOption FLASH name = { \
-        SCREEN_ITEM_INIT(screen_option_print, screen_option_select), \
-        { \
-            (TPrintable FLASH *) &name##_caption, \
-            (TPrintable FLASH *) &name##_option \
-        } \
-    }
+    SCREEN_COMPOSITE( \
+        name, \
+        _##name##_caption, \
+        _##name##_option, \
+        screen_option_select \
+    )
 
 #define SCREEN_OPTION_ITEM_LIST(items) {items {0, 0}}
 
@@ -52,11 +52,6 @@ typedef struct {
     uint16_t pos;
     TScreenValueSettings settings;
     TScreenOptionItem FLASH * option_items;
-} TScreenOptionVar;
-
-typedef struct {
-    TScreenItem _base;
-    TPrintable FLASH * elements[];
 } TScreenOption;
 
 void screen_option_print(TPrintable FLASH *);
