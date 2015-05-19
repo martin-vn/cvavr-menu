@@ -25,3 +25,12 @@
     void name##_next() {if (++name >= size) name = 0;}
 
 #define OPTION_SETTINGS(name) {name##_current, name##_next}
+
+#define ACTION_DEFINE(name, captionm, pos) \
+    void name##_action(TScreenItem FLASH * screen_item); \
+    SCREEN_ACTION( \
+        name, \
+        name##_action, \
+        SCREEN_TEXT(caption, pos) \
+    ); \
+    void name##_action(TScreenItem FLASH * screen_item)
