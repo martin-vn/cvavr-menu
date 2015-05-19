@@ -1,10 +1,10 @@
 #ifndef PRINTABLE_H
 #define PRINTABLE_H
 
-FLASH struct _TPrintable;
-typedef void (*TPrintAction)(FLASH struct _TPrintable FLASH *);
+struct _TPrintable;
+typedef void (*TPrintAction)(struct _TPrintable FLASH *);
 
-typedef FLASH struct _TPrintable {
+typedef struct _TPrintable {
     TPrintAction print;
 } TPrintable;
 

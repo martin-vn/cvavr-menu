@@ -8,13 +8,13 @@ typedef void (*TDisplayCursorShow)();
 typedef void (*TDisplayCursorHide)();
 typedef void (*TDisplayCursorTo)(uint8_t x, uint8_t y);
 
-typedef FLASH struct {
-    const uint16_t width;
-    const uint16_t height;
+typedef struct {
+    uint16_t width;
+    uint16_t height;
 } TDisplaySize;
 
-typedef FLASH struct {
-    TDisplaySize FLASH size;
+typedef struct {
+    TDisplaySize size;
     TDisplayFlushAction flush;
     TDisplayCursorShow show_cursor;
     TDisplayCursorHide hide_cursor;

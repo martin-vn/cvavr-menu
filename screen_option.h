@@ -34,29 +34,29 @@
         option_items \
     } \
 
-typedef FLASH struct {
-    int16_t FLASH key;
-    char FLASH * FLASH value;
+typedef struct {
+    int16_t key;
+    char FLASH * value;
 } TScreenOptionItem;
 
 typedef uint16_t (*TOptionGetter)();
 typedef void (*TOptionAction)();
 
-typedef FLASH struct {
+typedef struct {
     TOptionGetter current;
     TOptionAction next;
 } TScreenValueSettings;
 
-typedef FLASH struct {
-    TPrintable FLASH _base;
-    uint16_t FLASH pos;
-    TScreenValueSettings FLASH settings;
-    TScreenOptionItem FLASH * FLASH option_items;
+typedef struct {
+    TPrintable _base;
+    uint16_t pos;
+    TScreenValueSettings settings;
+    TScreenOptionItem FLASH * option_items;
 } TScreenOptionVar;
 
-typedef FLASH struct {
-    TScreenItem FLASH _base;
-    TPrintable FLASH * FLASH elements[];
+typedef struct {
+    TScreenItem _base;
+    TPrintable FLASH * elements[];
 } TScreenOption;
 
 void screen_option_print(TPrintable FLASH *);

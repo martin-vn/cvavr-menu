@@ -25,27 +25,27 @@
 
 #define SCREEN_VAR_SETTINGS(set, get, min, max) {set, get, min, max}
 
-typedef FLASH struct {
-    TScreenItem FLASH _base;
-    TPrintable FLASH * FLASH elements[];
+typedef struct {
+    TScreenItem _base;
+    TPrintable FLASH * elements[];
 } TScreenValue;
 
 typedef uint16_t (*TValueGetter)();
 typedef void (*TValueSetter)(uint16_t);
 
-typedef FLASH struct {
+typedef struct {
     TValueGetter current;
     TValueSetter change;
     TValueGetter min;
     TValueGetter max;
 } TScreenValueSettings;
 
-typedef FLASH struct {
-    TPrintable FLASH _base;
-    TScreenValueSettings FLASH settings;
-    uint16_t FLASH digits;
-    uint16_t FLASH decimals;
-    uint16_t FLASH pos;
+typedef struct {
+    TPrintable _base;
+    TScreenValueSettings settings;
+    uint16_t digits;
+    uint16_t decimals;
+    uint16_t pos;
 } TScreenValueVar;
 
 void screen_value_print(TPrintable FLASH * screen_item);

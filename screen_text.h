@@ -10,10 +10,10 @@
         pos \
     }
 
-typedef FLASH struct {
-    FLASH TPrintable _base;
-    char FLASH * FLASH text;
-    uint16_t FLASH pos;
+typedef struct {
+    TPrintable _base;
+    char FLASH * text;
+    uint16_t pos;
 } TScreenText;
 
 void screen_print_text(TPrintable FLASH * screen_item);

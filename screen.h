@@ -20,19 +20,19 @@
         } \
     }
 
-FLASH struct _TScreenItem;
+struct _TScreenItem;
 
-typedef void (*TScreenSelectAction)(FLASH struct _TScreenItem FLASH *);
+typedef void (*TScreenSelectAction)(struct _TScreenItem FLASH *);
 
-typedef FLASH struct _TScreenItem {
+typedef struct _TScreenItem {
     TPrintable _base;
     TScreenSelectAction select;
 } TScreenItem;
 
-typedef FLASH struct {
-    char FLASH * FLASH cursor;
-    TConsole FLASH * FLASH console;
-    TScreenItem FLASH * FLASH items[];
+typedef struct {
+    char FLASH * cursor;
+    TConsole FLASH * console;
+    TScreenItem FLASH * items[];
 } TScreen;
 
 void screen_init();

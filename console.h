@@ -13,7 +13,7 @@
 
 typedef void (*TConsoleAction)();
 
-typedef FLASH struct {
+typedef struct {
     TConsoleAction up;
     TConsoleAction down;
     TConsoleAction select;

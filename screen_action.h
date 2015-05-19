@@ -5,9 +5,9 @@
 #include "screen.h"
 #include "screen_text.h"
 
-typedef FLASH struct {
-    TScreenItem FLASH _base;
-    TPrintable FLASH * FLASH elements[];
+typedef struct {
+    TScreenItem _base;
+    TPrintable FLASH * elements[];
 } TScreenAction;
 
 #define SCREEN_ACTION(name, command, text) \
